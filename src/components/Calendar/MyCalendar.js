@@ -33,6 +33,7 @@ class MyCalendar extends React.Component {
     this.totalGrid = this.totalGrid.bind(this)
     this.viewDaysInMounth = this.viewDaysInMounth.bind(this)
     this.showAddEventsForm = this.showAddEventsForm.bind(this)
+    this.classDay = this.classDay.bind(this)
   }
 
   getCurrentMounth() {
@@ -76,14 +77,14 @@ class MyCalendar extends React.Component {
   daysInMonth() {
     let daysInMonth = [];
     for (let d = 1; d <= this.getDaysInMounth(); d++) {
-      const currentDay = d === this.getCurrentDay() ? "today" : '';
+     // const currentDay = d === this.getCurrentDay() ? "today" : '';
       const viewEvents = 0 === this.getEventsInDay(d).length ? "no-events" : "show-events";
-      const selectedDate = (d <= this.state.endDate && d >= this.state.startDate ) ? 'selected-date': 'no'; 
+      //const selectedDate = (d <= this.state.endDate && d >= this.state.startDate) ? 'selected-date' : '';
       daysInMonth.push(
         <TableCell
           align="center"
           key={d}
-          className={`calendar-day ${currentDay} ${selectedDate}`}
+          className={`calendar-day ${this.classDay(d).join(' ')}`}
           onClick={() => this.changeDate(d)}
           onMouseEnter={() => this.onMouseEnter(d)}
           onMouseLeave={() => this.onMouseLeave()}
@@ -119,6 +120,23 @@ class MyCalendar extends React.Component {
     return <TableRow>{d}</TableRow>;
   });
 
+  classDay(d) {
+    let className = [];
+    if (d === this.state.startDate) {
+      className.push('start');
+    }
+    if (d < this.state.endDate && d > this.state.startDate) {
+      className.push('selected-date');
+    }
+    if (d === this.state.endDate) {
+      className.push('end');
+    }
+    if (d === this.getCurrentDay()) {
+      className.push('today');
+    }
+    return className
+  };
+
   getEventsInDay(d) {
     let eventsInDay = []
     eventsInDay = this.state.events.filter((event) => {
@@ -145,7 +163,7 @@ class MyCalendar extends React.Component {
     })
   }
   onDayClick(e, d) {
-      this.setState({ selectedDay: d }, () => {});
+    this.setState({ selectedDay: d }, () => { });
   };
 
   onPrevMounth() {
@@ -172,7 +190,7 @@ class MyCalendar extends React.Component {
   }
 
   changeDate(d) {
-    let {startDate, endDate} = this.state;
+    let { startDate, endDate } = this.state;
 
     if (startDate === null || d < startDate || startDate !== endDate) {
       startDate = d;
