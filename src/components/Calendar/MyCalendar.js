@@ -77,9 +77,7 @@ class MyCalendar extends React.Component {
   daysInMonth() {
     let daysInMonth = [];
     for (let d = 1; d <= this.getDaysInMounth(); d++) {
-     // const currentDay = d === this.getCurrentDay() ? "today" : '';
       const viewEvents = 0 === this.getEventsInDay(d).length ? "no-events" : "show-events";
-      //const selectedDate = (d <= this.state.endDate && d >= this.state.startDate) ? 'selected-date' : '';
       daysInMonth.push(
         <TableCell
           align="center"
@@ -191,7 +189,6 @@ class MyCalendar extends React.Component {
 
   changeDate(d) {
     let { startDate, endDate } = this.state;
-
     if (startDate === null || d < startDate || startDate !== endDate) {
       startDate = d;
       endDate = d;

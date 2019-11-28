@@ -58,11 +58,14 @@ body {
 
 .selected-date {
   opacity: 0.5;
+
+  .show-events {
+    color: black;
+  }
 }
 
 .today {
-  background: $lightGradient;
-  background: $lightGradient;
+  font-weight: bold !important;
 }
 
 .wrapper-mounth {
