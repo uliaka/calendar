@@ -17,7 +17,9 @@ class MyCalendar extends React.Component {
       date: moment(),
       showAddEventsForm: false,
       showEventsDetails: false,
-      selectedDay: "",
+      selectedDay: '',
+      startDate: null,
+      endDay: null
     }
 
     this.getDaysInMounth = this.getDaysInMounth.bind(this)
@@ -74,14 +76,15 @@ class MyCalendar extends React.Component {
   daysInMonth() {
     let daysInMonth = [];
     for (let d = 1; d <= this.getDaysInMounth(); d++) {
-      let currentDay = d === this.getCurrentDay() ? "today" : '';
-      let viewEvents = 0 === this.getEventsInDay(d).length ? "no-events" : "show-events";
+      const currentDay = d === this.getCurrentDay() ? "today" : '';
+      const viewEvents = 0 === this.getEventsInDay(d).length ? "no-events" : "show-events";
+      const selectedDate = (d <= this.state.endDate && d >= this.state.startDate ) ? 'selected-date': 'no'; 
       daysInMonth.push(
         <TableCell
           align="center"
           key={d}
-          className={`calendar-day ${currentDay}`}
-          onClick={e => { this.onDayClick(e, d) }}
+          className={`calendar-day ${currentDay} ${selectedDate}`}
+          onClick={() => this.changeDate(d)}
           onMouseEnter={() => this.onMouseEnter(d)}
           onMouseLeave={() => this.onMouseLeave()}
         >
@@ -142,14 +145,9 @@ class MyCalendar extends React.Component {
     })
   }
   onDayClick(e, d) {
-    this.setState({
-      selectedDay: d,
-      showEventsDetails: true,
-    },
-      () => {
-      }
-    );
+      this.setState({ selectedDay: d }, () => {});
   };
+
   onPrevMounth() {
     this.setState({
       date: this.state.date.subtract(1, "month")
@@ -171,6 +169,24 @@ class MyCalendar extends React.Component {
     this.setState({
       showEventsDetails: false
     })
+  }
+
+  changeDate(d) {
+    let {startDate, endDate} = this.state;
+
+    if (startDate === null || d < startDate || startDate !== endDate) {
+      startDate = d;
+      endDate = d;
+    } else if (d === startDate && d === endDate) {
+      startDate = null;
+      endDate = null;
+    } else if (d > startDate) {
+      endDate = d;
+    }
+    this.setState({
+      startDate,
+      endDate
+    });
   }
 
   render() {
