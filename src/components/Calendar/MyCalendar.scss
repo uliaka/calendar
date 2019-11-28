@@ -1,0 +1,148 @@
+$backgroundColor: rgb(0,228,201);
+$backgrpundGradient: linear-gradient(312deg, rgba(0,228,201,1) 0%, rgba(28,164,230,1) 100%);
+$lightColor: rgb(180,248,249);
+$lightGradient: linear-gradient(0deg, rgba(180,248,249,1) 0%, rgba(255,255,255,1) 100%);
+$shadow: 1px 5px 18px #b3b3b4;
+
+body {
+  font-size: 25px;
+}
+.my-calendar {
+  width: 30%;
+  min-width: 400px;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  padding: 20px;
+  box-shadow: $shadow;
+  text-align: center;
+  background: $backgroundColor;
+  background: $backgrpundGradient;
+}
+
+.calendar-day {
+  position: relative;
+  cursor: pointer;
+
+  &:hover {
+    background: $lightColor;
+    background: $lightGradient;
+    box-shadow: 1px 1px 10px 1px rgba(112, 111, 111, 0.75);
+
+    .show-events {
+      color: black;
+    }
+  }
+
+  .no-events {
+    display: none;
+  }
+  
+  .show-events {
+    position: absolute;
+    color: white;
+    top: 2px;
+    right: 2px;
+    border: 1px solid #bc08e9;
+    border-radius: 50%;
+    padding: 2px;
+  
+  }
+}
+
+.today {
+  background: $lightGradient;
+  background: $lightGradient;
+}
+
+.wrapper-mounth {
+  position: relative;
+}
+
+.button-prev, .button-next {
+  cursor: pointer;
+  height: 17px;
+  overflow: hidden;
+  position: absolute;
+  width: 10px;
+  top:4px;
+}
+
+.button-prev {
+  left: 0;
+} 
+
+.button-next {
+  right:0;
+}
+
+.button-prev:before, .button-next:before {
+  background-color:white;;
+  content: "";
+  height: 17px;
+  left: 5px;
+  position: absolute;
+  top: 0;
+  transform: rotate(45deg);
+  width: 17px;
+}
+
+.button-next:before {
+  left: auto;
+  right: 5px;
+}
+
+.button-prev:after, .button-next:after {
+  background-color:white;
+  content: "";
+  height: 17px;
+  left: 8px;
+  position: absolute;
+  top: 0;
+  transform: rotate(45deg);
+  width: 17px;
+}
+
+.button-next:after {
+  left: auto;
+  right: 8px;
+}
+
+.icon-plus {
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  position: fixed;
+  top: 20px;
+  left: auto;
+  cursor: pointer;
+  box-shadow: $shadow;
+  
+  &:after {
+    content: " ";
+    position: absolute;
+    display: block;
+    background: $backgroundColor;
+    background: $backgrpundGradient;
+    height: 5px;
+    margin-top: -3px;
+    top: 50%;
+    left: 20px;
+    right: 20px;
+    z-index: 9;
+  }
+  &:before {
+    content: " ";
+    position: absolute;
+    display: block;
+    background: $backgroundColor;
+    background: $backgrpundGradient;
+    width: 5px;
+    margin-left: -3px;
+    left: 50%;
+    top: 20px;
+    bottom: 20px;
+    z-index: 9;
+  }
+}
