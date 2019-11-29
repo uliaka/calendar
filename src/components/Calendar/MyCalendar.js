@@ -19,7 +19,8 @@ class MyCalendar extends React.Component {
       showEventsDetails: false,
       selectedDay: '',
       startDate: null,
-      endDay: null
+      endDay: null,
+      clicked: false
     }
 
     this.getDaysInMounth = this.getDaysInMounth.bind(this)
@@ -34,6 +35,7 @@ class MyCalendar extends React.Component {
     this.viewDaysInMounth = this.viewDaysInMounth.bind(this)
     this.showAddEventsForm = this.showAddEventsForm.bind(this)
     this.classDay = this.classDay.bind(this)
+    this.getEventsInSelectedDate = this.getEventsInSelectedDate.bind(this)
   }
 
   getCurrentMounth() {
@@ -84,11 +86,11 @@ class MyCalendar extends React.Component {
           key={d}
           className={`calendar-day ${this.classDay(d).join(' ')}`}
           onClick={() => this.changeDate(d)}
-          onMouseEnter={() => this.onMouseEnter(d)}
-          onMouseLeave={() => this.onMouseLeave()}
+          onMouseEnter={(e) => this.onMouseEnter(e, d)}
+          onMouseLeave={(e) => this.onMouseLeave(e)}
         >
           {d}
-          <div className={` ${viewEvents}`}>{this.getEventsInDay(d).length}</div>
+          <div className={`${viewEvents}`}>{this.getEventsInDay(d).length}</div>
         </TableCell>
       );
     }
@@ -145,6 +147,16 @@ class MyCalendar extends React.Component {
     });
     return eventsInDay;
   }
+
+  getEventsInSelectedDate() {
+    let { startDate, endDate } = this.state;
+    const eventsInSelectedDate = this.state.events.filter((event) => {
+      const eventDate = Number.parseInt(moment(event.date, "DD-MM-YYYY").format("D"))
+      return  (eventDate <= endDate && eventDate >= startDate)
+    });
+    return eventsInSelectedDate;
+  }
+
   showAddEventsForm() {
     this.setState({
       showAddEventsForm: true
@@ -175,13 +187,19 @@ class MyCalendar extends React.Component {
     });
   }
 
-  onMouseEnter(d) {
+  onMouseEnter(e, d) {
+    if(this.state.clicked) {
+       return e.stopPropagation()
+    }
     this.setState({
       selectedDay: d,
       showEventsDetails: true
     })
   }
-  onMouseLeave() {
+  onMouseLeave(e) {
+    if(this.state.clicked) {
+      return e.stopPropagation()
+   }
     this.setState({
       showEventsDetails: false
     })
@@ -200,7 +218,9 @@ class MyCalendar extends React.Component {
     }
     this.setState({
       startDate,
-      endDate
+      endDate,
+      clicked: true,
+      showEventsDetails: true
     });
   }
 
@@ -234,7 +254,8 @@ class MyCalendar extends React.Component {
           {this.state.showEventsDetails &&
             <EventsDetails
               selectedDate={this.getDate(this.state.selectedDay)}
-              eventsInDay={this.getEventsInDay(this.state.selectedDay)}
+              eventsInSelectDay={this.getEventsInDay(this.state.selectedDay)}
+              eventsInSelectedDate={this.getEventsInSelectedDate()}
             />
           }
         </>
