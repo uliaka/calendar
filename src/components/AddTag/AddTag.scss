@@ -1,0 +1,47 @@
+.container {
+  border: 1px solid blue;
+
+  input {
+    border: none;
+    margin: 5px;
+		&:focus {
+			outline: transparent;
+		}
+  }
+}
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(162, 162, 243);
+  width: auto;
+  margin: 5px;
+  padding: 3px;
+  border-radius: 7px;
+
+  .tag-title {
+    font-size: 18px;
+  }
+
+  .tag-delete-icon {
+		width: 16px;
+		height: 16px;
+		text-align: center;
+		font-size: 14px;
+		margin-left: 8px;
+		color: #0052cc;
+		border-radius: 50%;
+		background: #fff;
+    cursor: pointer;
+
+    &:before {
+      content: 'x';
+      font-family: Arial, sans-serif;
+    }
+  }
+}

@@ -19,7 +19,7 @@ class MyCalendar extends React.Component {
       showEventsDetails: false,
       selectedDay: '',
       startDate: null,
-      endDay: null,
+      endDate: null,
       clicked: false
     }
 
@@ -152,9 +152,15 @@ class MyCalendar extends React.Component {
     let { startDate, endDate } = this.state;
     const eventsInSelectedDate = this.state.events.filter((event) => {
       const eventDate = Number.parseInt(moment(event.date, "DD-MM-YYYY").format("D"))
-      return  (eventDate <= endDate && eventDate >= startDate)
+      return (eventDate <= endDate && eventDate >= startDate)
     });
     return eventsInSelectedDate;
+  }
+
+  resetDate() {
+    this.setState({
+      date: moment()
+    });
   }
 
   showAddEventsForm() {
@@ -188,8 +194,8 @@ class MyCalendar extends React.Component {
   }
 
   onMouseEnter(e, d) {
-    if(this.state.clicked) {
-       return e.stopPropagation()
+    if (this.state.clicked) {
+      return e.stopPropagation()
     }
     this.setState({
       selectedDay: d,
@@ -197,9 +203,9 @@ class MyCalendar extends React.Component {
     })
   }
   onMouseLeave(e) {
-    if(this.state.clicked) {
+    if (this.state.clicked) {
       return e.stopPropagation()
-   }
+    }
     this.setState({
       showEventsDetails: false
     })
@@ -207,7 +213,7 @@ class MyCalendar extends React.Component {
 
   changeDate(d) {
     let { startDate, endDate } = this.state;
-    if (startDate === null || d < startDate || startDate !== endDate) {
+    if (!startDate || startDate !== endDate) {
       startDate = d;
       endDate = d;
     } else if (d === startDate && d === endDate) {
@@ -215,6 +221,9 @@ class MyCalendar extends React.Component {
       endDate = null;
     } else if (d > startDate) {
       endDate = d;
+    } else if (d < startDate) {
+      endDate = startDate;
+      startDate = d;
     }
     this.setState({
       startDate,
