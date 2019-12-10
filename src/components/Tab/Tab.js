@@ -16,11 +16,8 @@ const Tab = (props) => {
 }
 
 const ListTabs = (props) => {
-  const [activeTab, setActiveTab] = useState(0);
-  const onClick = index => setActiveTab(index)
-  const className = index => index === activeTab ? 'active-tab' : ''
-  
-  const [content, setContent] = useState(props.tabs.activeTab);
+  const [activeTab, setActiveTab] = useState(props.activeTab || 0);  
+  const [content, setContent] = useState(props.tabs[props.activeTab].content);
   
   const tabTitles = props.tabs.map((tab, index) => (
     <div
@@ -42,7 +39,7 @@ const ListTabs = (props) => {
 const tabs = [
   {
     title: 'title 1',
-    content: () => <div>Content here</div>
+    content: () => <Tab content="content 1" />
   },
   {
     title: 'title 2',
@@ -50,13 +47,13 @@ const tabs = [
   },
   {
     title: 'title 3',
-    content: () => <div>Content here3</div>
+    content: () => <Tab content="content 3" />
   },
 ]
 
 const Tabs = () => {
   return (
-    <ListTabs tabs={tabs} />
+    <ListTabs tabs={tabs} activeTab={1} />
   )
 }
 
