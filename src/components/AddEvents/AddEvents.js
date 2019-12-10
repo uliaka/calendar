@@ -3,8 +3,8 @@ import './AddEvents.scss';
 import AddTag from '../AddTag/AddTag.js'
 
 const AddEvents = (props) => {
-  const [event, setEvent] = useState({ title: "", time: "", date: "" });
-
+  const [event, setEvent] = useState({ title: "", time: "", date: "", tags: [] });
+  console.log('event', event)
   const handleInputChange = (e) => {
     const value = e.target.value;
     const name = e.target.name;
@@ -50,7 +50,9 @@ const AddEvents = (props) => {
           <span className="label">Date</span>
           <span className="border"></span>
         </label>
-        <AddTag/>
+          <AddTag
+            tags={event.tags}
+          />
         <div className="add-event btn"
           type='submit'
           onClick={() => {

@@ -1,0 +1,33 @@
+.tabs-container {
+  box-shadow: 1px 5px 18px #b3b3b4;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.title {
+  cursor: pointer;
+  flex-grow: 1;
+  max-height: 40px;
+  display: inline-block;
+  padding: 10px;
+  vertical-align: top;
+  background-color: #eee;
+  border-left: 10px solid #ccc;
+
+}
+
+.content {
+  width: 100%;
+  display: block;
+  border: 1px solid green;
+  background-color: #fff;
+  padding: 20px;
+  flex-basis: auto;
+}
+
+.active-tab {
+  border-left: 10px solid rgb(247, 161, 64);
+  background-color: #fff;
+}

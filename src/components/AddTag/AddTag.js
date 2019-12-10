@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './AddTag.scss'
 
 const AddTag = (props) => {
+  console.log('props', props)
   const [tags, setTags] = useState(props.tags || []);
 
   const addTags = (e) => {

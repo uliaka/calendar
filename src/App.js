@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.scss';
 import Calendar from './components/Calendar/MyCalendar.js';
 
