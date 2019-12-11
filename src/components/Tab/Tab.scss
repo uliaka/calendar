@@ -1,6 +1,9 @@
+.tabs-container {
+  box-shadow: 0px 0px 10px 0px rgba(107,107,107,1);
+}
+
 .title {
   cursor: pointer;
-  flex-grow: 1;
   max-height: 40px;
   display: inline-block;
   padding: 10px;
@@ -11,12 +14,9 @@
 }
 
 .content {
-  width: 100%;
   display: block;
-  border: 1px solid green;
   background-color: #fff;
   padding: 20px;
-  flex-basis: auto;
 }
 
 .active-tab {

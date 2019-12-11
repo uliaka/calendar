@@ -3,7 +3,7 @@ import './Tab.scss'
 
 
 const Tab = (props) => {
-  const { title, onClick, content, className } = props
+  const { content } = props
   return (
     <>
       {content &&
@@ -16,9 +16,9 @@ const Tab = (props) => {
 }
 
 const ListTabs = (props) => {
-  const [activeTab, setActiveTab] = useState(props.activeTab || 0);  
+  const [activeTab, setActiveTab] = useState(props.activeTab || 0);
   const [content, setContent] = useState(props.tabs[props.activeTab].content);
-  
+
   const tabTitles = props.tabs.map((tab, index) => (
     <div
       className={index === activeTab ? "title active-tab" : "title"}
@@ -27,11 +27,13 @@ const ListTabs = (props) => {
         setActiveTab(index)
       }}>{tab.title}</div>
   ))
-  
+
   return (
     <>
-      {tabTitles}
-      {content}
+      <div className='tabs-container'>
+        {tabTitles}
+        {content}
+      </div>
     </>
   )
 }
@@ -53,7 +55,7 @@ const tabs = [
 
 const Tabs = () => {
   return (
-    <ListTabs tabs={tabs} activeTab={1} />
+    <ListTabs tabs={tabs} activeTab={0} />
   )
 }
 
