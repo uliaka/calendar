@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Tab.scss'
 
 
@@ -21,6 +21,7 @@ const ListTabs = (props) => {
 
   const tabTitles = props.tabs.map((tab, index) => (
     <div
+      key={index}
       className={index === activeTab ? "title active-tab" : "title"}
       onClick={() => {
         setContent(props.tabs[index].content)
@@ -28,34 +29,25 @@ const ListTabs = (props) => {
       }}>{tab.title}</div>
   ))
 
+  useEffect(() => {
+    setActiveTab(props.activeTab);
+    setContent(props.tabs[props.activeTab].content)
+  }, [props.activeTab, props.tabs]);
+
   return (
     <>
       <div className='tabs-container'>
         {tabTitles}
-        {content}
+        <Tab content={content} />
       </div>
     </>
   )
 }
 
-const tabs = [
-  {
-    title: 'title 1',
-    content: () => <Tab content="content 1" />
-  },
-  {
-    title: 'title 2',
-    content: () => <Tab content="content 2" />
-  },
-  {
-    title: 'title 3',
-    content: () => <Tab content="content 3" />
-  },
-]
 
-const Tabs = () => {
+const Tabs = (props) => {
   return (
-    <ListTabs tabs={tabs} activeTab={0} />
+    <ListTabs tabs={props.tabs} activeTab={props.activeTab} />
   )
 }
 
