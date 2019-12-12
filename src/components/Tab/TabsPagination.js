@@ -19,7 +19,7 @@ const List = (props) => {
       return setActive(0);
     }
     setActive(prevPage);
-    sideScroll(ref.current,'left', 25, 100, 10);
+    sideScroll(ref.current, 'left', 25, 100, 10);
   }
 
   const nextPage = () => {
@@ -28,27 +28,27 @@ const List = (props) => {
       return setActive(props.title.length - 1);
     }
     setActive(nextPage);
-    sideScroll(ref.current,'right', 25, 100, 10);
+    sideScroll(ref.current, 'right', 25, 100, 10);
   }
 
   useEffect(() => {
     setActive(props.active);
   }, [props.active]);
 
-  const sideScroll = (element,direction,speed,distance,step) => {
+  const sideScroll = (element, direction, speed, distance, step) => {
     let scrollAmount = 0;
-    const slideTimer = setInterval(function(){
-        if(direction === 'left'){
-            element.scrollLeft -= step;
-        } else {
-            element.scrollLeft += step;
-        }
-        scrollAmount += step;
-        if(scrollAmount >= distance){
-            window.clearInterval(slideTimer);
-        }
+    const slideTimer = setInterval(function () {
+      if (direction === 'left') {
+        element.scrollLeft -= step;
+      } else {
+        element.scrollLeft += step;
+      }
+      scrollAmount += step;
+      if (scrollAmount >= distance) {
+        window.clearInterval(slideTimer);
+      }
     }, speed);
-}
+  }
 
   return (
     <>
