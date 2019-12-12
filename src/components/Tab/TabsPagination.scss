@@ -1,0 +1,58 @@
+.container {
+  padding: 10px;
+  display: flex;
+}
+  
+.name-container {
+  width: 200px;
+  height: 50px;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.name-container::-webkit-scrollbar {
+  display: none;
+}
+  
+.name {
+  cursor: pointer;
+  max-height: 50px;
+  flex: 0 0 auto;
+  padding: 10px;
+  background-color: #eee;
+  box-shadow: 0px 0px 5px 0px rgb(168, 166, 166);
+}
+  
+.active {
+  background-color: #fff;
+}
+  
+.arrow-prev, .arrow-next {
+  cursor: pointer;
+  position: relative;
+  display: inline;
+  max-height: 50px;
+  min-width: 10px;
+  padding: 10px;
+  box-shadow: 0px 0px 5px 0px rgb(168, 166, 166);  
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-top: 1px solid #000;
+    border-right: 1px solid #000;
+  }
+}
+  .arrow-prev::before {
+    transform: rotate(-135deg);
+  }
+  
+  .arrow-next::before {
+    transform: rotate(45deg);
+  }
+  
+  
+  
