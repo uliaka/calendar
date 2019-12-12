@@ -37,7 +37,17 @@ const ListTabs = (props) => {
   return (
     <>
       <div className='tabs-container'>
-        {tabTitles}
+        <div className='title-container'>
+          <div
+            className='arrow-prev'
+          >
+          </div>
+          {tabTitles}
+          <div
+            className='arrow-next'
+          >
+          </div>
+        </div>
         <Tab content={content} />
       </div>
     </>
