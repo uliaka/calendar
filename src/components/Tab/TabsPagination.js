@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './TabsPagination.scss'
+import MenuButton from './MenuButton.js';
+import Modal from './Modal.js';
 
 const List = (props) => {
   const [active, setActive] = useState(props.active || 0);
+  const [modalOpen, setModalOpen] = useState(false);
   const ref = React.createRef();
   const titles = props.title.map((title, index) => (
     <div
@@ -50,9 +53,20 @@ const List = (props) => {
     }, speed);
   }
 
+  const openModal = () => {
+    setModalOpen(true)
+  }
+  const closeModal = () => {
+    setModalOpen(false)
+  }
+
   return (
     <>
       <div className='container'>
+        <Modal open={modalOpen} close={closeModal}>
+          <div className='vertical-name-container'>{titles}</div>
+        </Modal>
+        <MenuButton onClick={openModal} />
         <div
           className='arrow-prev'
           onClick={prevPage}
