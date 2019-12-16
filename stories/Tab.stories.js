@@ -13,8 +13,16 @@ const tabs = [
     content: () => "content 2"
   },
   {
-    title: 'title 3',
+    title: 'title title title 3',
     content: () => "content 3"
+  },
+  {
+    title: 'title 4',
+    content: () => "content 4"
+  },
+  {
+    title: 'title 5',
+    content: () => "content 5"
   },
 ]
 

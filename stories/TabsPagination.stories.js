@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import TabsPagination from '../src/components/Tab/TabsPagination.js';
 import { withKnobs, select  } from "@storybook/addon-knobs";
 
-const title = ['title 1', 'title 2', 'title 3', 'title 4', 'title 5']
+const title = ['1', '2', '3', '4', '5', '6', '7']
 
 storiesOf('TabsPagination', module)
   .addDecorator(withKnobs)
