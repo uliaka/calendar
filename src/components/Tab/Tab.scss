@@ -1,17 +1,19 @@
 .tabs-container {
   padding: 10px;
-  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: max-content;
 }
 
 .title-container {
   display: flex;
-  justify-content: center;
 }
 
 .title {
   cursor: pointer;
   max-height: 50px;
-  max-width: 100px;
+  max-width: 500px;
   flex: 0 0 auto;
   padding: 10px;
   background-color: #eee;
@@ -22,8 +24,8 @@
 }
 
 .title-section {
+  width: 400px;
   display: flex;
-  flex-wrap: wrap;
   overflow-x: auto;
   overflow-y: hidden;
 }
@@ -33,7 +35,7 @@
 }
 
 .content {
-  display: block;
+  height: auto;
   background-color: #fff;
   padding: 20px;
   box-shadow: 0px 0px 5px 0px rgb(168, 166, 166);
@@ -75,5 +77,19 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: auto;
+
+    .title {
+      width: 100px;
+    }
   }
 
+
+@media screen and (max-width: 550px) {
+  .tabs-container {
+    width: auto;
+  }
+}

@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './Tab.scss';
 import MenuButton from './MenuButton.js';
 import Modal from './Modal.js';
-import TabsPagination from './TabsPagination.js'
-
 
 const Content = (props) => {
   const { content } = props
@@ -24,9 +22,11 @@ const ListTabs = (props) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const ref = React.createRef();
+  const refTitle = React.createRef();
 
   const tabTitles = props.tabs.map((tab, index) => (
     <div
+      ref={refTitle}
       key={index}
       className={index === activeTab ? "title active-tab" : "title"}
       onClick={() => {
@@ -41,23 +41,25 @@ const ListTabs = (props) => {
   }, [props.activeTab, props.tabs]);
 
   const prev = () => {
+    const width = refTitle.current ? refTitle.current.offsetWidth : 0;
     let prev = activeTab - 1;
     if (prev < 0) {
       return setActiveTab(0);
     }
     setActiveTab(prev);
     setContent(props.tabs[prev].content)
-    sideScroll(ref.current, 'left', 25, 100, 10);
+    sideScroll(ref.current, 'left', 25, width, 10);
   }
 
   const next = () => {
+    const width = refTitle.current ? refTitle.current.offsetWidth : 0;
     let next = activeTab + 1;
     if (next > props.tabs.length - 1) {
       return setActiveTab(props.tabs.length - 1);
     }
     setActiveTab(next);
     setContent(props.tabs[next].content)
-    sideScroll(ref.current, 'right', 25, 100, 10);
+    sideScroll(ref.current, 'right', 25, width, 10);
   }
 
   const openModal = () => {
@@ -96,7 +98,7 @@ const ListTabs = (props) => {
           >
           </div>
           <div className='title-section' ref={ref}>
-          {tabTitles}
+            {tabTitles}
           </div>
           <div
             className='arrow-next'

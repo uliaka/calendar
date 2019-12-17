@@ -7,7 +7,9 @@ const Modal = (props) => {
     <div className={showHideClassName}>
       <div className="modal-main">
         <div className='button-close' onClick={props.close}></div>
-        {props.children}
+        <div>
+          {props.children}
+        </div>
       </div>
     </div>
   );
