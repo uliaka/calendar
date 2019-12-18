@@ -27,17 +27,20 @@ const ListTabs = (props) => {
   const tabTitles = props.tabs.map((tab, index) => {
     return (
     <div
-      ref={tab => elRef.current[index] = tab}
+      ref={el => elRef.current[index] = el}
       key={index}
       className={index === activeTab ? "title active-tab" : "title"}
       onClick={() => {
         setContent(props.tabs[index].content)
         setActiveTab(index)
-        elRef.current[index].scrollIntoView();
+        elRef.current[index].scrollIntoView({block: "center",  behavior: "smooth"});
       }}>{tab.title}</div>
   )})
+
+  console.log('elRef.current', elRef.current)
+
   useEffect(() => {
-    elRef.current = elRef.current.slice(0, props.tabs.length);
+    elRef.current[props.activeTab].scrollIntoView({block: "center", behavior: "smooth"});
     setActiveTab(props.activeTab);
     setContent(props.tabs[props.activeTab].content)
   }, [props.activeTab, props.tabs]);
