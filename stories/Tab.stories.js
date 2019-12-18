@@ -5,7 +5,7 @@ import { withKnobs, select } from "@storybook/addon-knobs";
 
 const tabs = [
   {
-    title: 'title 1',
+    title: 'title tittttt1',
     content: () => "content 1"
   },
   {

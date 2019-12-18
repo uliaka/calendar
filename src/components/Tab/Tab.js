@@ -22,26 +22,28 @@ const ListTabs = (props) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const ref = React.createRef();
-  const refTitle = React.createRef();
+  const elRef = React.useRef([]);
 
-  const tabTitles = props.tabs.map((tab, index) => (
+  const tabTitles = props.tabs.map((tab, index) => {
+    return (
     <div
-      ref={refTitle}
+      ref={tab => elRef.current[index] = tab}
       key={index}
       className={index === activeTab ? "title active-tab" : "title"}
       onClick={() => {
         setContent(props.tabs[index].content)
         setActiveTab(index)
+        elRef.current[index].scrollIntoView();
       }}>{tab.title}</div>
-  ))
-
+  )})
   useEffect(() => {
+    elRef.current = elRef.current.slice(0, props.tabs.length);
     setActiveTab(props.activeTab);
     setContent(props.tabs[props.activeTab].content)
   }, [props.activeTab, props.tabs]);
 
   const prev = () => {
-    const width = refTitle.current ? refTitle.current.offsetWidth : 0;
+    const width = elRef.current[activeTab] ? elRef.current[activeTab].offsetWidth : 0;
     let prev = activeTab - 1;
     if (prev < 0) {
       return setActiveTab(0);
@@ -52,7 +54,7 @@ const ListTabs = (props) => {
   }
 
   const next = () => {
-    const width = refTitle.current ? refTitle.current.offsetWidth : 0;
+    const width = elRef.current[activeTab] ? elRef.current[activeTab].offsetWidth : 0;
     let next = activeTab + 1;
     if (next > props.tabs.length - 1) {
       return setActiveTab(props.tabs.length - 1);
